@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFhcm5pIiwiaWQiOiI2OGFkOTY3MzlmNjMxMGY4NzkyMzY2MjgiLCJpYXQiOjE3NTYyMDg4NTF9.Fi-7OzwYK7otMGHPTyjixcBIdBGJRHiDs3iuUb5gWoU
+
+{
+    "content": "this cantent posted from Aarni with token authorization",
+    "important": true
+}
