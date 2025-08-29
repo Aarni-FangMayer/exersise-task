@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import noteService from "./services/notes";
 import loginService from "./services/login";
 import Note from "./components/Note";
@@ -8,7 +8,7 @@ import NoteForm from "./components/NoteForm";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
+  // const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,21 +43,16 @@ const App = () => {
         setNotes(notes.filter((n) => n.id !== id));
       });
   };
-  const addNote = (event) => {
-    event.preventDefault();
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    };
+  const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility();
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
-      setNewNote("");
     });
   };
 
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value);
-  };
+  // const handleNoteChange = (event) => {
+  //   setNewNote(event.target.value);
+  // };
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
 
@@ -90,13 +85,11 @@ const App = () => {
     </Togglable>
   );
 
+  const noteFormRef = useRef();
+
   const noteForm = () => (
-    <Togglable buttonLabel="new note">
-      <NoteForm
-        onSubmit={addNote}
-        value={newNote}
-        handleChange={handleNoteChange}
-      />
+    <Togglable buttonLabel="new note" ref={noteFormRef}>
+      <NoteForm createNote={addNote} />
     </Togglable>
   );
 
