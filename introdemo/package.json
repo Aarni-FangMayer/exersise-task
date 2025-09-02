@@ -12,6 +12,7 @@
     "server": "json-server -p 3001 db.json"
   },
   "dependencies": {
+    "@vitest/coverage-v8": "^3.2.4",
     "axios": "^1.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
